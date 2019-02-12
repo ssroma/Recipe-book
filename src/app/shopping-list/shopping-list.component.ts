@@ -18,4 +18,13 @@ export class ShoppingListComponent implements OnInit {
   ngOnInit() {
   }
 
+  addToIngredients(ingredient: Ingredient){
+    this.ingredients.push(ingredient);
+  }
+
+  removeIngredients(arg){
+    let num = this.ingredients.length -1
+    this.ingredients.splice(num, 1)
+  }
+
 }

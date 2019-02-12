@@ -1,13 +1,25 @@
 <div class="row">
   <div class="col-md-12">
-      <img src="" alt="" class="img-fluid">
+      <img [src]="detailItem?.imagePath" alt="{{detailItem?.name}}" class="img-fluid">
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <h2 class="h2">Recipe Name</h2>
+    <h2 class="h2">{{detailItem?.name}}</h2>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-12">
+    {{detailItem?.description}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    Ingredients.
+  </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
       <div class="dropdown">
@@ -22,13 +34,13 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12">
-      Decription.
+      {{detailItem?.description}}
     </div>
   </div>
   <div class="row">
       <div class="col-md-12">
         Ingredients.
       </div>
-    </div>
+    </div> -->

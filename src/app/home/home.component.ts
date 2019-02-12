@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  selectedOn: string = 'recipe';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  chooseFeature(selected: string){
+    this.selectedOn = selected;
+    console.log(`from home : ` + this.selectedOn);
   }
 
 }
