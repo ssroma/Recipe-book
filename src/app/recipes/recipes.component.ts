@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from './recipe.module';
+
+import { Recipe } from './recipe.model';
+import { RecipesService } from '../services/recipes.services';
 
 @Component({
   selector: 'app-recipes',
@@ -8,20 +10,15 @@ import { Recipe } from './recipe.module';
 })
 export class RecipesComponent implements OnInit {
   
-  recepiItem: Recipe;
+  itemDetailed: Recipe;
 
-  constructor() { }
+  constructor( private recipeService: RecipesService) { }
 
   ngOnInit() {
-  }
-
-  // sendToDetails(recipeDetails: Recipe){
-  //   console.log(recipeDetails);
-  // }
-
-  receivedFromListRecipe(receivedFromRecipe: Recipe){
-    this.recepiItem = receivedFromRecipe;
-    console.log('This is from recipe component : ' + receivedFromRecipe.name);
+    this.recipeService.sentToDetails
+      .subscribe((recipeFromItem: Recipe ) => { 
+        return this.itemDetailed = recipeFromItem;
+      })
   }
 
 }
