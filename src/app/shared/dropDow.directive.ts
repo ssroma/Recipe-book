@@ -15,7 +15,7 @@ export class DropDownDirective {
    
 
     @HostListener('click') toggleOpen(evenData: Event ){
-        console.log('this is from the directive.');
+       //console.log('this is from the directive.');
         this.isOpen = !this.isOpen;
     }
 }

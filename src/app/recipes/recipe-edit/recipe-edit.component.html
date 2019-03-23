@@ -1,10 +1,21 @@
+<div class="row recipe-edit-row" >
+  <div class="col-md-12 text-center" >
+    <h3>{{ editMode ? "Edit Recipe" : "Add Recipe" }}</h3>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-12">
-    <form >
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" >
+
       <div class="row">
         <div class="col-md-12">
-          <button type="submit" class="btn btn-success">Save</button>
-          <button type="button" class="btn btn-danger">Cancel</button>
+          <button 
+            type="submit" 
+            class="btn btn-success"
+            [disabled]="recipeForm.invalid"
+          >Save</button>
+          <button type="button" (click)="onCancel()" class="btn btn-danger">Cancel</button>
         </div>
       </div>
 
@@ -16,6 +27,7 @@
               type="text"
               class="form-control"
               id="nameInput"
+              formControlName="nameInput"
             >
           </div>
         </div>
@@ -24,11 +36,13 @@
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <label for="imageUrl">Name Url</label>
+            <label for="imageInput">Name Url</label>
             <input 
               type="text"
               class="form-control"
-              id="imageUrl"
+              id="imageInput"
+              formControlName="imageInput"
+              #imageInput
             >
           </div>
         </div>
@@ -36,46 +50,59 @@
 
       <div class="row">
         <div class="col-md-12">
-          <img src="" alt="" class="img-responsive">
+          <img [src]="imageInput.value" alt="" class="img-fluid" >
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-12">
           <div class="form-group">
-            <label for="description">Description</label>
+            <label for="descriptionInput">Description</label>
             <textarea 
               type="text"
               class="form-control"
-              id="description"
-              rows="6"
+              id="descriptionInput"
+              formControlName="descriptionInput"
+              rows="4"
             ></textarea>
           </div>
         </div>
       </div>
 
       <!-- Group of ingredients -->
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row" formArrayName="ingredients" >
+        <div class="col-md-12" >
          
-          <div class="row">
-            <div class="col-md-8">
+          <div class="row" 
+            *ngFor="let ingredientsCtl of ingredients.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div class="col-md-6" >
+              <label for="name">Name :</label>
               <input 
                 type="text"
                 class="form-control"
+                formControlName="name"
               >
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
+                <label for="name">Amount :</label>
               <input 
-                type="number"
+                type="text"
                 class="form-control"
+                formControlName="amount"
               >
             </div>
-            <div class="col-md-2">
-              <button type="button" class="btn btn-danger">X</button>
+            <div class="col-md-2 buttonDelete" >
+              <button type="button" (click)="onDeleteIngredient(i)" class="btn btn-danger">X</button>
             </div>
           </div>
           
+          <div class="row">
+            <div class="col-md-12 buttonOnAdd">
+              <button type="button" class="btn btn-success" (click)="onAddIngredients()" >Add Ingredients</button>
+            </div>
+          </div>
 
         </div>
       </div>
