@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+      <h3>Sing In</h3>
+      <form (ngSubmit)="onSignIn(f)" #f="ngForm" >
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            name="email" 
+            ngModel
+            required
+            #email="ngModel"
+          >
+          <div class="alert alert-danger" *ngIf="!email.valid && email.touched"> 
+            <p *ngIf="email.errors.required" >Email is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            class="form-control" 
+            id="password" 
+            name="password" 
+            required
+            minlength="6"
+            maxlength="8"
+            ngModel
+            #password="ngModel"
+          >  
+          <div class="alert alert-danger" *ngIf="!password.valid && password.touched"> 
+            <p *ngIf="password.errors.required" >Password is required.</p>
+            <p *ngIf="password.errors.minlength" >Min 6 characters and Max 8.</p>
+          </div>
+        </div>
+        
+
+        <button [disabled]="f.invalid" class="btn btn-primary">Sign In</button>        
+      </form>
+    </div>
+  </div>
+</div>

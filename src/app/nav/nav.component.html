@@ -12,24 +12,24 @@
         <li class="nav-item" routerLinkActive="active" >
           <a class="nav-link" routerLink="/shopping-list" >Shopping List</a>
         </li>
-
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Fetch/Save
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Save Data</a>
-            <a class="dropdown-item" href="#">Fetch Data</a>
-          </div>
-        </li> -->
-
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li class="nav-item" routerLinkActive="active" >
+            <a class="nav-link" routerLink="/signup" >Sing Up</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active" >
+            <a class="nav-link" routerLink="/signin" >Sing In</a>
+          </li>
+        </ng-template>
+        <li class="nav-item" *ngIf="authService.isAuthenticated()" >
+          <a class="nav-link" style="cursor: pointer;" (click)="onLogOut()" >Logout</a>
+        </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" *ngIf="authService.isAuthenticated()"> 
         <li class="dropdown">
           <a href="#" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" >Save Data</a> 
-            <a class="dropdown-item" >Fetch Data</a> 
+            <a class="dropdown-item" (click)="onSaveData()" >Save Data</a> 
+            <a class="dropdown-item" (click)="onFetchData()" >Fetch Data</a> 
           </div>
         </li>
       </ul>
