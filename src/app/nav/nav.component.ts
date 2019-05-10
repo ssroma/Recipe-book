@@ -35,4 +35,8 @@ export class NavComponent implements OnInit {
     this.toastr.error("Logged Out", "Thanks");
   }
 
+  isAuthenticated(){
+    return this.authService.isAuthenticated();
+  }
+
 }
